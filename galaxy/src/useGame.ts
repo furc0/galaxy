@@ -8,7 +8,25 @@ import {
 } from './gameLogic';
 import { generateShapes } from './shapes';
 import { getLevelById, getBlockedCells, unlockLevel, calculateStars, setLevelStars } from './levels';
-import { loadSettings, ACHIEVEMENTS } from './storage';
+import {
+  loadStats,
+  saveStats,
+  loadDaily,
+  saveDaily,
+  todayKey,
+  mulberry32,
+  hashString,
+  type Stats,
+} from './storage';
+
+import {
+  playAchievement,
+  playLevelWin,
+  playGameOverSound,
+  playPlaceSound,
+  playClearSound,
+  playComboSound,
+} from './sounds';
 
 export interface GameResult {
   won: boolean;
