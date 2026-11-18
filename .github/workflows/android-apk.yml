@@ -3,6 +3,7 @@ name: Build Android APK
 on:
   push:
     branches:
+      - main
       - fix/typescript-missing-imports
     paths:
       - "galaxy/**"
@@ -10,7 +11,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: android-apk-${{ github.ref }}
@@ -18,7 +19,7 @@ concurrency:
 
 jobs:
   build:
-    name: Build installable debug APK
+    name: Build and publish installable APK
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
@@ -58,10 +59,27 @@ jobs:
           chmod +x ./gradlew
           ./gradlew --no-daemon assembleDebug
 
-      - name: Upload APK
+      - name: Prepare release APK
+        run: cp galaxy/android/app/build/outputs/apk/debug/app-debug.apk Prizma.apk
+
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v7
         with:
           name: Prizma-debug-apk
-          path: galaxy/android/app/build/outputs/apk/debug/app-debug.apk
+          path: Prizma.apk
           if-no-files-found: error
           retention-days: 30
+
+      - name: Publish latest APK release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: android-latest
+          name: Призма — последняя версия APK
+          body: |
+            Автоматическая сборка Android-приложения «Призма».
+
+            Установка: скачайте Prizma.apk на Android-устройство и откройте файл.
+            При запросе разрешите установку приложений из этого источника.
+          files: Prizma.apk
+          overwrite_files: true
+          make_latest: true
