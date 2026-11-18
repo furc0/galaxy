@@ -1,0 +1,19 @@
+{
+  "name": "Призма — Puzzle Game",
+  "short_name": "Призма",
+  "description": "Головоломка с фигурами: свободная игра, бесконечные уровни и ежедневное задание.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0e1a",
+  "theme_color": "#0a0e1a",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
