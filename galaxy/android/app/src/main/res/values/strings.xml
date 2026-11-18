@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Призма</string>
+    <string name="title_activity_main">Призма</string>
+    <string name="package_name">com.furc0.prizma</string>
+    <string name="custom_url_scheme">com.furc0.prizma</string>
+</resources>
